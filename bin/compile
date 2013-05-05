@@ -7,33 +7,30 @@ CACHE_DIR=$2
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 source $BIN_DIR/install_maven
+cp -R $CACHE_DIR/.maven/ $BUILD_DIR
 
 CONSOLE_VERSION="0.7.0-SNAPSHOT"
-VRAPTOR_CONSOLE_PATH=".vraptor-console"
-VRAPTOR_CONSOLE=$CACHE_DIR/$VRAPTOR_CONSOLE_PATH/vraptor-console/vraptor-console.sh
+VRAPTOR_CONSOLE_PATH="$BUILD_DIR/.vraptor-console"
+VRAPTOR_CONSOLE=$VRAPTOR_CONSOLE_PATH/vraptor-console/vraptor-console.sh
 VRAPTOR_DIST_URL="http://dl.dropboxusercontent.com/u/2682197/vraptor-console-$CONSOLE_VERSION.tar.gz"
 
-
-rm -rf $VRAPTOR_CONSOLE_PATH
-if [ -d $CACHE_DIR/$VRAPTOR_CONSOLE_PATH ]; then
-    cp -r $CACHE_DIR/$VRAPTOR_CONSOLE_PATH $VRAPTOR_CONSOLE_PATH
-fi
-
 echo -n "-----> Installing vraptor-console-$CONSOLE_VERSION..."
+
+#TODO: remove when its time
+rm -rf $VRAPTOR_CONSOLE_PATH
+
 if [ ! -e $VRAPTOR_CONSOLE ]; then 
-    mkdir -p $CACHE_DIR/$VRAPTOR_CONSOLE_PATH
-    curl --silent --location $VRAPTOR_DIST_URL > $CACHE_DIR/$VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz
-    tar xzf $CACHE_DIR/$VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz -C $CACHE_DIR/$VRAPTOR_CONSOLE_PATH/
+    mkdir -p $VRAPTOR_CONSOLE_PATH
+    curl --silent --location $VRAPTOR_DIST_URL > $VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz
+    tar xzf $VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz -C $VRAPTOR_CONSOLE_PATH/
     chmod +x $VRAPTOR_CONSOLE 
 fi
 echo " done"
 
-export PATH="$PATH:$CACHE_DIR/$VRAPTOR_CONSOLE_PATH/vraptor-console/"
+export PATH="$PATH:$VRAPTOR_CONSOLE_PATH/vraptor-console/"
 
 PROFILE_PATH="$BUILD_DIR/.profile.d/vraptor-console.sh"
 mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$CACHE_DIR/$VRAPTOR_CONSOLE_PATH/:$PATH"' >> $PROFILE_PATH
-
-$VRAPTOR_CONSOLE run
-
+echo 'export PATH=/app/.vraptor-console/vraptor-console/:$PATH' >> $PROFILE_PATH
+echo 'export PATH=/app/.maven/bin/:$PATH' >> $PROFILE_PATH
 
