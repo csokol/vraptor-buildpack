@@ -12,7 +12,7 @@ cp -R $CACHE_DIR/.maven/ $BUILD_DIR
 CONSOLE_VERSION="0.7.0-SNAPSHOT"
 VRAPTOR_CONSOLE_PATH="$BUILD_DIR/.vraptor-console"
 VRAPTOR_CONSOLE=$VRAPTOR_CONSOLE_PATH/vraptor-console/vraptor-console.sh
-VRAPTOR_DIST_URL="http://dl.dropboxusercontent.com/u/2682197/vraptor-console-$CONSOLE_VERSION.tar.gz"
+VRAPTOR_DIST_URL="http://vraptor-console.googlecode.com/files/vraptor-console-0.7.0-SNAPSHOT.tar.gz"
 
 echo -n "-----> Installing vraptor-console-$CONSOLE_VERSION..."
 
