@@ -9,6 +9,8 @@ CACHE_DIR=$2
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 
+source $BIN_DIR/install_jdk
+
 if [ -e $BUILD_DIR/pom.xml ]; then
     source $BIN_DIR/install_maven
     cp -R $CACHE_DIR/.maven/ $BUILD_DIR
