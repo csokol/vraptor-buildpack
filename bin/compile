@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
+set -e
+
 # Parse args
 BUILD_DIR=$1
 CACHE_DIR=$2
