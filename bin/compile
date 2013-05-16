@@ -6,8 +6,11 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
-source $BIN_DIR/install_maven
-cp -R $CACHE_DIR/.maven/ $BUILD_DIR
+
+if [ -e $BUILD_DIR/pom.xml ]; then
+    source $BIN_DIR/install_maven
+    cp -R $CACHE_DIR/.maven/ $BUILD_DIR
+fi
 
 CONSOLE_VERSION="0.7.0-SNAPSHOT"
 VRAPTOR_CONSOLE_PATH="$BUILD_DIR/.vraptor-console"
