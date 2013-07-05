@@ -31,6 +31,7 @@ if [ ! -e $VRAPTOR_CONSOLE ]; then
     curl --silent --location $VRAPTOR_DIST_URL > $VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz
     tar xzf $VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz -C $VRAPTOR_CONSOLE_PATH/
     chmod +x $VRAPTOR_CONSOLE 
+    $VRAPTOR_CONSOLE exit #only to download jetty
     rm $VRAPTOR_CONSOLE_PATH/vraptor-console.tar.gz
 fi
 echo " done"
